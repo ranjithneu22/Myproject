@@ -24,7 +24,7 @@
  <form id="form1" runat="server">
  <table class="auto-style1">
  <tr>
- <td class="auto-style3">FirstName</td>
+ <td class="auto-style3">FirstNName</td>
  <td class="auto-style4">
  <asp:TextBox ID="txtfname" runat="server"></asp:TextBox>
  </td>
