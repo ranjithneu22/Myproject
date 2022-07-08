@@ -1,2 +1,0 @@
-"this is file a"
-Adding the data for the second commit  
