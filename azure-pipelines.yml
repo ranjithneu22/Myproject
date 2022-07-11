@@ -42,7 +42,7 @@ stages:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
-- stage: 'Deploy Dev'
+- stage: 'DeployDev'
   displayName: 'Deploy the web application'
   dependsOn: Build
   jobs:
@@ -96,9 +96,9 @@ stages:
               TakeAppOfflineFlag: $(Parameters.TakeAppOfflineFlag)
               XmlTransformation: $(Parameters.XmlTransformation)
               XmlVariableSubstitution: $(Parameters.XmlVariableSubstitution)
-- stage: 'Deploy QA'
+- stage: 'DeployQA'
   displayName: 'Deploy the web application'
-  dependsOn: Deploy Dev
+  dependsOn: DeployDev
   jobs:
   - deployment: 'DeployToQA'
     displayName: 'Deploy the web application to QA environment'
