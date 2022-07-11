@@ -42,7 +42,7 @@ stages:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
-- stage: 'Deploy'
+- stage: 'Deploy Dev'
   displayName: 'Deploy the web application'
   dependsOn: Build
   jobs:
@@ -64,6 +64,60 @@ stages:
       Parameters.XmlVariableSubstitution: true
     environment:
       name: Dev
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: drop
+            
+          - task: IISWebAppManagementOnMachineGroup@0
+            displayName: 'IIS Web App Manage'
+            inputs:
+              IISDeploymentType: '$(Parameters.IISDeploymentType)'
+              ActionIISWebsite: '$(Parameters.ActionIISWebsite)'
+              WebsiteName: '$(Parameters.WebsiteName)'
+              WebsitePhysicalPath: '$(Parameters.WebsitePhysicalPath)'
+              AddBinding: $(Parameters.AddBinding)
+              ParentWebsiteNameForVD: '$(Parameters.WebsiteName)'
+              VirtualPathForVD: '$(Parameters.VirtualPathForApplication)'
+              ParentWebsiteNameForApplication: '$(Parameters.WebsiteName)'
+              VirtualPathForApplication: '$(Parameters.VirtualPathForApplication)'
+              AppPoolName: '$(Parameters.AppPoolName)'
+
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            displayName: 'IIS Web App Deploy'
+            inputs:
+              WebSiteName: '$(Parameters.WebsiteName)'
+              VirtualApplication: '$(Parameters.VirtualApplication)'
+              Package: '$(Parameters.Package)'
+              RemoveAdditionalFilesFlag: $(Parameters.RemoveAdditionalFilesFlag)
+              TakeAppOfflineFlag: $(Parameters.TakeAppOfflineFlag)
+              XmlTransformation: $(Parameters.XmlTransformation)
+              XmlVariableSubstitution: $(Parameters.XmlVariableSubstitution)
+- stage: 'Deploy QA'
+  displayName: 'Deploy the web application'
+  dependsOn: Deploy Dev
+  jobs:
+  - deployment: 'DeployToQA'
+    displayName: 'Deploy the web application to QA environment'
+    variables:
+      Parameters.IISDeploymentType: 'IISWebsite'
+      Parameters.ActionIISWebsite: 'CreateOrUpdateWebsite'
+      Parameters.WebsiteName: 'Default Web Site'
+      Parameters.WebsitePhysicalPath: '%SystemDrive%\inetpub\wwwroot'
+      Parameters.AddBinding: false
+      Parameters.VirtualPathForApplication: '/'
+      Parameters.AppPoolName: ''
+      Parameters.VirtualApplication: ''
+      Parameters.Package: '$(Pipeline.Workspace)\drop\*.zip'
+      Parameters.RemoveAdditionalFilesFlag: true
+      Parameters.TakeAppOfflineFlag: true
+      Parameters.XmlTransformation: true
+      Parameters.XmlVariableSubstitution: true
+    environment:
+      name: QA
       resourceType: VirtualMachine
     strategy:
       runOnce:
