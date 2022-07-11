@@ -44,7 +44,6 @@ stages:
 
 - stage: 'DeployQA'
   displayName: 'Deploy to QA'
-  dependsOn: DeployDev
   jobs:
   - deployment: 'DeployToQA'
     displayName: 'Deploy the web application to QA environment'
