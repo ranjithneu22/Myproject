@@ -18,7 +18,7 @@ namespace WebApplication4
         }
         protected void Button1_Click(object sender, EventArgs e)
         {
-            SqlCommand cmd = new SqlCommand("insert into tbl values('" + txtfname.Text + "','" +
+            SqlCommand cmd = new SqlCommand("insert into dev values('" + txtfname.Text + "','" +
            txtlname.Text + "','" + txtcity.Text + "','" + txtgender.Text + "')", con);
             cmd.ExecuteNonQuery();
             con.Close();
