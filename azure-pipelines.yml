@@ -56,7 +56,7 @@ stages:
       Parameters.AddBinding: false
       Parameters.VirtualPathForApplication: '/'
       Parameters.AppPoolName: ''
-      Parameters.VirtualApplication: 'AspNetDemo'
+      Parameters.VirtualApplication: ''
       Parameters.Package: '$(Pipeline.Workspace)\drop\*.zip'
       Parameters.RemoveAdditionalFilesFlag: true
       Parameters.TakeAppOfflineFlag: true
