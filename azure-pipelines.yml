@@ -43,7 +43,7 @@ stages:
         publishLocation: 'Container'
 
 - stage: 'DeployDev'
-  displayName: 'Deploy the web application'
+  displayName: 'Deploy to DeV'
   dependsOn: Build
   jobs:
   - deployment: 'DeployToDev'
@@ -97,7 +97,7 @@ stages:
               XmlTransformation: $(Parameters.XmlTransformation)
               XmlVariableSubstitution: $(Parameters.XmlVariableSubstitution)
 - stage: 'DeployQA'
-  displayName: 'Deploy the web application'
+  displayName: 'Deploy to QA'
   dependsOn: DeployDev
   jobs:
   - deployment: 'DeployToQA'
