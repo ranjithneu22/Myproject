@@ -21,6 +21,7 @@
  </style>
 </head>
 <body>
+ <h1> This is Dev Environment </h1>
  <form id="form1" runat="server">
  <table class="auto-style1">
  <tr>
@@ -63,7 +64,7 @@
      <asp:Label ID="Label4" runat="server"></asp:Label>
      <br />
 
- <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" SelectCommand="SELECT * FROM [tbl]"></asp:SqlDataSource>
+ <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ConnectionString2 %>" SelectCommand="SELECT * FROM [dev]"></asp:SqlDataSource>
      <tr>
      <td class="auto-style2">Latest Commit Deployment environment test</td>
      </tr>
