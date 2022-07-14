@@ -1,6 +1,6 @@
 data "azurerm_image" "myimage" {
-  name                = "vhdvm-image-2022"
-  resource_group_name = "testmachine"
+  name                = "myPackerImage"
+  resource_group_name = "myPackerGroup"
 }
 
 data "azurerm_subnet" "subnet1" {
