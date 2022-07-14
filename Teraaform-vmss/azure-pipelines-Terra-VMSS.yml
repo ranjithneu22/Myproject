@@ -1,6 +1,6 @@
 trigger:
 - none
-   
+     
 stages:
   - stage: validate
     jobs:
@@ -16,6 +16,7 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'init'
+          workingDirectory: Teraaform-vmss
           backendServiceArm: 'packerprinci'
           backendAzureRmResourceGroupName: 'sql'
           backendAzureRmStorageAccountName: 'ranjithtest2244'
@@ -26,6 +27,7 @@ stages:
         inputs:
           provider: 'azurerm'
           command: 'validate'
+          workingDirectory: Teraaform-vmss
   - stage: deploy
     jobs:
       - deployment: deploy_terraform
@@ -45,6 +47,7 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'init'
+                  workingDirectory: Teraaform-vmss
                   backendServiceArm: 'packerprinci'
                   backendAzureRmResourceGroupName: 'sql'
                   backendAzureRmStorageAccountName: 'ranjithtest2244'
@@ -55,10 +58,12 @@ stages:
                 inputs:
                   provider: 'azurerm'
                   command: 'plan'
+                  workingDirectory: Teraaform-vmss
                   environmentServiceNameAzureRM: 'packerprinci'
               - task: TerraformTaskV3@3
                 displayName: 'apply'
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
+                  workingDirectory: Teraaform-vmss
                   environmentServiceNameAzureRM: 'packerprinci'
