@@ -17,7 +17,7 @@ stages:
           provider: 'azurerm'
           command: 'init'
           workingDirectory: Teraaform-vmss
-          backendServiceArm: 'packerprinci'
+          backendServiceArm: 'VS-Prof-Dev-170(8700f8cc-3037-487a-9fac-959ee3ef7fda)'
           backendAzureRmResourceGroupName: 'sql'
           backendAzureRmStorageAccountName: 'ranjithtest2244'
           backendAzureRmContainerName: 'test'
@@ -32,7 +32,7 @@ stages:
     jobs:
       - deployment: deploy_terraform
         continueOnError: false
-        environment: 'packerprinci'
+        environment: 'VS-Prof-Dev-170(8700f8cc-3037-487a-9fac-959ee3ef7fda)'
         strategy:
          runOnce:
            deploy:
@@ -48,7 +48,7 @@ stages:
                   provider: 'azurerm'
                   command: 'init'
                   workingDirectory: Teraaform-vmss
-                  backendServiceArm: 'packerprinci'
+                  backendServiceArm: 'VS-Prof-Dev-170(8700f8cc-3037-487a-9fac-959ee3ef7fda)'
                   backendAzureRmResourceGroupName: 'sql'
                   backendAzureRmStorageAccountName: 'ranjithtest2244'
                   backendAzureRmContainerName: 'test'
@@ -59,11 +59,12 @@ stages:
                   provider: 'azurerm'
                   command: 'plan'
                   workingDirectory: Teraaform-vmss
-                  environmentServiceNameAzureRM: 'packerprinci'
+                  environmentServiceNameAzureRM: 'VS-Prof-Dev-170(8700f8cc-3037-487a-9fac-959ee3ef7fda)'
               - task: TerraformTaskV3@3
                 displayName: 'apply'
                 inputs:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: Teraaform-vmss
-                  environmentServiceNameAzureRM: 'packerprinci'
+                  environmentServiceNameAzureRM: 'VS-Prof-Dev-170(8700f8cc-3037-487a-9fac-959ee3ef7fda)'
+             
