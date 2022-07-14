@@ -1,1 +1,64 @@
-
+trigger:
+- none
+   
+stages:
+  - stage: validate
+    jobs:
+    - job: validate
+      continueOnError: false
+      steps:
+      - task: TerraformInstaller@0
+        displayName: 'install'
+        inputs:
+          terraformVersion: 'latest'
+      - task: TerraformTaskV3@3
+        displayName: 'init'
+        inputs:
+          provider: 'azurerm'
+          command: 'init'
+          backendServiceArm: 'packerprinci'
+          backendAzureRmResourceGroupName: 'sql'
+          backendAzureRmStorageAccountName: 'ranjithtest2244'
+          backendAzureRmContainerName: 'test'
+          backendAzureRmKey: 'terraform.tfstate'
+      - task: TerraformTaskV3@3
+        displayName: validate
+        inputs:
+          provider: 'azurerm'
+          command: 'validate'
+  - stage: deploy
+    jobs:
+      - deployment: deploy_terraform
+        continueOnError: false
+        environment: 'packerprinci'
+        strategy:
+         runOnce:
+           deploy:
+            steps:
+              - checkout: self
+              - task: TerraformInstaller@0
+                displayName: 'install'
+                inputs:
+                  terraformVersion: 'latest'
+              - task: TerraformTaskV3@3
+                displayName: 'init'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'init'
+                  backendServiceArm: 'packerprinci'
+                  backendAzureRmResourceGroupName: 'sql'
+                  backendAzureRmStorageAccountName: 'ranjithtest2244'
+                  backendAzureRmContainerName: 'test'
+                  backendAzureRmKey: 'terraform.tfstate'
+              - task: TerraformTaskV3@3
+                displayName: 'Plan'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'plan'
+                  environmentServiceNameAzureRM: 'packerprinci'
+              - task: TerraformTaskV3@3
+                displayName: 'apply'
+                inputs:
+                  provider: 'azurerm'
+                  command: 'apply'
+                  environmentServiceNameAzureRM: 'packerprinci'
