@@ -101,4 +101,4 @@ stages:
               RemoveAdditionalFilesFlag: $(Parameters.RemoveAdditionalFilesFlag)
               TakeAppOfflineFlag: $(Parameters.TakeAppOfflineFlag)
               XmlTransformation: $(Parameters.XmlTransformation)
-              XmlVariableSubstitution: $(Parameters.XmlVariableSubstitution)
+              XmlVariableSubstitution: $(Parameters.XmlVariableSubstitution) 
